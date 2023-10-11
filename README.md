@@ -1,5 +1,5 @@
 # Arbitrage Bet Finder
-A tool for finding arbitrages using implicit odds. This repository contains a notebook version, simple code version, and command-line interface. This repository relies on [Odds API](https://the-odds-api.com/)
+A tool for finding arbitrages using implicit odds. This repository contains a notebook version, simple code version, and command-line interface. This repository relies on [Odds API](https://the-odds-api.com/).
 
 ## 💻 Usage
 
