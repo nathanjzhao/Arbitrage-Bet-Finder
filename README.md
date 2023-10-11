@@ -12,7 +12,7 @@ In order to interact with the commandline interface, clone the project with
 Then, in terminal, enter
 
 ```
-    python find_arbitrages.py --key <YOUR_API_KEY>
+  python find_arbitrages.py --key <YOUR_API_KEY>
 ```
 
 
