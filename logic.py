@@ -2,6 +2,9 @@ import requests
 
 BASE_URL = "https://api.the-odds-api.com/v4"
 
+# TODO
+# - Account for arbitrages across bookmakers
+
 def get_sports(key) -> list:
     url = f"{BASE_URL}/sports/"
 
