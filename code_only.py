@@ -43,16 +43,27 @@ def get_data(key, sport, regions, markets) -> list:
     
     return response.json()
 
-def filter_arbitrages(data, threshold):
+def filter_arbitrages(data, markets, threshold):
+    MAX_VAL = 10**9
+
     arbitrages = {}
+    odds_counts = {}
+
+    if "h2h" in markets:
+        odds_counts["h2h"] = (MAX_VAL) * 3 # WIN, LOSE, DRAW
+    
     for match in data:
         for bookmaker in match["bookmakers"]:
             for market in bookmaker["markets"]:
-                implied_odds = sum(1/outcome["price"] for outcome in market["outcomes"])
+                market_name = market["key"]
+                if market_name == "h2h":
+
+                    implied_odds = sum(1/outcome["price"] for outcome in market["outcomes"])
                 
                 if implied_odds < 1 - threshold:
 
                     match_name = f'{match["home_team"]} vs. {match["away_team"]}'
+
 
                     if implied_odds > arbitrages.get(match_name, (-1, -1, -1))[-1]:
                         arbitrages[match_name] = {"bookmaker" : bookmaker["key"], "market" : market["key"], "odds" : implied_odds}
@@ -65,7 +76,7 @@ sports = get_sports(API_KEY)
 print(sports) # find sports if want to use
 
 pricings_data = get_data(API_KEY, SPORT if SPORT else sports[0], REGIONS, MARKETS)
-arbitrages = filter_arbitrages(pricings_data, THRESHOLD) 
+arbitrages = filter_arbitrages(pricings_data, MARKETS, THRESHOLD) 
 
 ################################################
 
